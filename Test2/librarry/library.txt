@@ -1,0 +1,55 @@
+Nguyen, Anh & Cervellati, Federico & Kunz, Andreas(1--4) Gain Compensation in Redirected Walking,  20
+Razzaque, Sharif & Kohn, Zachariah & Whitton, Mary C(105--106) Redirected walking,  9
+Guilford, Joy Paul(1954) Psychometric methods, ( ) 
+Darken, Rudolph P & Cockayne, William R & Carmein, David(1997) The omni-directional treadmill: a locomotion device for virtual worlds,  213--221
+Templeman, James N & Denbrook, Patricia S & Sibert, Linda E(1999) Virtual locomotion: Walking in place through virtual environments,Presence(6)598--617
+Usoh, Martin & Arthur, Kevin & Whitton, Mary C & Bastos, Rui & Steed, Anthony & Slater, Mel & Brooks Jr, Frederick P(1999) Walking> walking-in-place> flying, in virtual environments,  359--364
+Field, Tom and Vamplew, Peter(2004) Generalised algorithms for redirected walking in virtual environments, ( ) 
+Iwata, Hiroo & Yano, Hiroaki & Fukushima, Hiroyuki & Noma, Haruo(2005) Circulafloor [locomotion interface],IEEE Computer Graphics and Applications(1)64--67
+Williams, Betsy & Narasimham, Gayathri & McNamara, Tim P & Carr, Thomas H & Rieser, John J & Bodenheimer, Bobby(2006) Updating orientation in large virtual environments using scaled translational gain,  21--28
+Podlesek, Anja i & Komidar, Luka(2006},}) Comparison of three psychophysical methods for measuring displacement in frontal plane motion,Review of psychology(1)51--60
+Su, Jianbo(2007) Motion compression for telepresence locomotion,Presence: Teleoperators and Virtual Environments(4)385--398
+Williams, Betsy & Narasimham, Gayathri & Rump, Bjoern & Mcnamara, Timothy P. & Carr, Thomas H. & Rieser, John & Bodenheimer, Bobby(2007},}) Exploring large virtual environments with an HMD when physical space is limited,  41-48
+Steinicke, Frank & Bruder, Gerd & Jerald, Jason & Frenz, Harald & Lappe, Markus(2008) Analyses of human sensitivity to redirected walking,  149--156
+Steinicke, Frank & Bruder, Gerd & Kohli, Luv & Jerald, Jason & Hinrichs, Klaus(2008) Taxonomy and implementation of redirection techniques for ubiquitous passive haptic feedback,  217--223
+Bruder, Gerd & Steinicke, Frank & Hinrichs, Klaus H(2009) Arch-explore: A natural user interface for immersive architectural walkthroughs,  75--82
+Peck, Tabitha C & Fuchs, Henry & Whitton, Mary C(2009) Evaluation of reorientation techniques and distractors for walking in large virtual environments,IEEE Transactions on Visualization and Computer Graphics(3)383--394
+Bruder, Gerd & Steinicke, Frank & Hinrichs, Klaus H & Lappe, Markus(2009}}) Reorientation During Body Turns.,  145--152
+Steinicke, Frank & Bruder, Gerd & Jerald, Jason & Frenz, Harald & Lappe, Markus(2010) Estimation of detection thresholds for redirected walking techniques,IEEE transactions on visualization and computer graphics(1)17--27
+Suma, Evan A & Krum, David M & Finkelstein, Samantha & Bolas, Mark(2011) Effects of redirection on spatial orientation in real and virtual environments,  35--38
+Suma, Evan A & Clark, Seth & Krum, David & Finkelstein, Samantha & Bolas, Mark & Warte, Zachary(2011) Leveraging change blindness for redirection in virtual environments,  159--166
+Hodgson, Eric & Bachmann, Eric & Waller, David(2011) Redirected walking to explore virtual environments: Assessing the potential for spatial interference,ACM Transactions on Applied Perception (TAP)(4)22
+Goldfeather, Jack(2012) Adaptive redirected walking in a virtual world,  17--20
+Suma, Evan A & Lipps, Zachary & Finkelstein, Samantha & Krum, David M & Bolas, Mark(2012) Impossible spaces: Maximizing natural walking in virtual environments with self-overlapping architecture,IEEE Transactions on Visualization and Computer Graphics(4)555--564
+Bruder, Gerd & Interrante, Victoria & Phillips, Lane & Steinicke, Frank(2012) Redirecting walking and driving for natural navigation in immersive virtual environments,IEEE transactions on visualization and computer graphics(4)538--545
+Neth, Christian T & Souman, Jan L & Engel, David & Kloos, Uwe & Bulthoff, Heinrich H & Mohler, Betty J(2012) Velocity-dependent dynamic curvature gain for redirected walking,IEEE transactions on visualization and computer graphics(7)1041--1052
+Hodgson, Eric & Bachmann, Eric(2013) Comparing four approaches to generalized redirected walking: Simulation and live user data,IEEE transactions on visualization and computer graphics(4)634--643
+Anson, Eric & Rosenberg, Russell & Agada, Peter & Kiemel, Tim & Jeka, John(2013) Does visual feedback during walking result in similar improvements in trunk control for young and older healthy adults?,Journal of neuroengineering and rehabilitation(1)110
+Serafin, Stefania & Nilsson, Niels C & Sikstrom, Erik & De Goetzen, Amalia & Nordahl, Rolf(2013) Estimation of detection thresholds for acoustic based redirected walking techniques,  161--162
+Bruder, Gerd & Steinicke, Frank & Bolte, Benjamin & Wieland, Phil & Frenz, Harald & Lappe, Markus(2013) Exploiting perceptual limitations and illusions to support walking through virtual environments in confined physical spaces,Displays(2)132--141
+Vasylevska, Khrystyna & Kaufmann, Hannes & Bolas, Mark & Suma, Evan A(2013) Flexible spaces: Dynamic layout generation for infinite walking in virtual environments,  39--42
+Zmuda, Michael A & Wonser, Joshua L & Bachmann, Eric R & Hodgson, Eric(2013) Optimizing constrained-environment redirected walking instructions using search techniques,IEEE transactions on visualization and computer graphics(11)1872--1884
+Campos, Jennifer L & Butler, John S & B(2014) Contributions of visual and proprioceptive information to travelled distance estimation during changing sensory congruencies,Experimental brain research(10)3277--3289
+Zhang, Ruimin & Li, Bochao & Kuhl, Scott A(2014) Human sensitivity to dynamic translational gains in head-mounted displays,  62--65
+Hodgson, Eric & Bachmann, Eric & Thrash, Tyler(2014) Performance of redirected walking algorithms in a constrained virtual world,IEEE transactions on visualization and computer graphics(4)579--587
+Nescher, Thomas & Huang, Ying-Yin & Kunz, Andreas(2014) Planning redirection techniques for optimal free walking experience using model predictive control,  111--118
+Kuroda, Tsuyoshi & Hasuo, Emi(2014) The very first step to start psychophysical experiments,Acoustical Science and Technology(1)1--9
+Riecke, Bernhard E & Freiberg, Jacob B & Grechkin, Timofey Y(2015) Can walking motions improve visually induced rotational self-motion illusions in virtual reality?,Journal of vision(2)3--3
+Bruder, Gerd & Lubas, Paul & Steinicke, Frank(2015) Cognitive resource demands of redirected walking,IEEE transactions on visualization and computer graphics(4)539--544
+Guy, Emilie & Punpongsanon, Parinya & Iwai, Daisuke & Sato, Kosuke & Boubekeur, Tamy(2015) LazyNav: 3D ground navigation with non-critical body parts,  43--50
+Azmandian, Mahdi & Grechkin, Timofey & Bolas, Mark & Suma, Evan(2015) Physical space requirements for redirected walking: how size and shape affect performance,  93--100
+Ngoc, Nguyen Thi Anh & Rothacher, Yannick & Brugger, Peter & Lenggenhager, Bigna & Kunz, Andreas(2016) Estimation of individual redirected walking thresholds using standard perception tests,  329--330
+Sun, Qi & Wei, Li-Yi & Kaufman, Arie(2016) Mapping virtual and physical reality,ACM Transactions on Graphics (TOG)(4)64
+Azmandian, Mahdi & Grechkin, Timofey & Bolas, Mark & Suma, Evan(2016) The redirected walking toolkit: a unified development platform for exploring large virtual environments,  9--14
+Azmandian, Mahdi & Grechkin, Timofey & Rosenberg, Evan Suma(2017) An evaluation of strategies for two-user redirected walking in shared physical spaces,  91--98
+Langbehn, Eike & Lubos, Paul & Bruder, Gerd & Steinicke, Frank(2017) Bending the curve: Sensitivity to bending of curved paths and application in room-scale vr,IEEE transactions on visualization and computer graphics(4)1389--1398
+Dong, Zhi-Chao & Fu, Xiao-Ming & Zhang, Chi & Wu, Kang & Liu, Ligang(2017) Smooth assembled mappings for large-scale real walking,ACM Transactions on Graphics (TOG)(6)211
+Zhang, Jingxin & Langbehn, Eike & Krupke, Dennis & Katzakis, Nicholas & Steinicke, Frank(2018) Detection Thresholds for Rotation and Translation Gains in 360° Video-Based Telepresence Systems,IEEE transactions on visualization and computer graphics(4)1671--1680
+Nguyen, Anh & Rothacher, Yannick & Lenggenhager, Bigna & Brugger, Peter & Kunz, Andreas(2018) Individual differences and impact of gender on curvature redirection thresholds,  5
+Schmitz, Patric & Hildebrandt, Julian & Valdez, Andr(2018) You spin my head right round: Threshold of limited immersion for rotation gains in redirected walking,IEEE transactions on visualization and computer graphics(4)1623--1632
+Nitzsche, Norbert & Hanebeck, Uwe D & Schmidt, G(265--277) Motion compression for telepresent walking in large-scale remote environments,  5079
+Medina, Eliana & Fruland, Ruth & Weghorst, Suzanne(27) Virtusphere: Walking in a human size VR “hamster ball”,  52
+Path Reproduction Tests Using a Torus Treadmill(6) Iwata, Hiroo and Yoshida, Yoko,Presence: Teleoperators and Virtual Environments(8)587--597
+Studies in space orientation. IV. Further experiments on perception of the upright with displaced visual fields(762-782},}) Witkin, H. A. and Asch, S. E.,1948(38)6
+Interrante, Victoria & Ries, Brian & Anderson, Lee(IEEE}}) Seven league boots: A new metaphor for augmented locomotion through moderately large scale immersive virtual environments,  2007
+Walker, James(Michigan Technological University) Redirected Walking in Virtual Environments, ( ) 

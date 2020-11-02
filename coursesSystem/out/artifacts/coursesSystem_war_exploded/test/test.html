@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <title>jQuery</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+      <style>
+    .box{
+        width: 1500px;
+    }
+    .tab{
+        margin: auto;
+        width: 215px;
+        height: 150px;
+    }
+    span{
+        float: left;
+        height: 50px;
+        padding: 0 30px;
+        border: 1px solid #333333;
+        text-align: center;
+        cursor: pointer;
+    }
+    .content div{
+        margin: auto;
+        width: 1400px;
+        border: 1px solid #333333;
+    }
+    .tab_active{
+        background-color: #FF0000;
+    }
+    .show{
+        background-color: #c9c9c9;
+        display: block;
+    }
+</style>
+    <style>
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="tab">
+        <span class="tab_active">1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+    <div class="content">
+        <div class="show">
+            <table style="margin: 10px auto;" id="tableList">
+                      
+                <thead>
+                <!-- //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+                        
+                <tr>
+                              
+                    <th>courseId</th>
+                              
+                    <th>name</th>
+                              
+                    <th>learningTime</th>
+
+                    <th>learningScore</th>
+
+                    <th>place</th>
+                              
+                    <th>selectedNum/maxSelectedNum</th>
+                              
+                    <th>teacher</th>
+                            
+                </tr>
+                      
+                </thead>
+                      
+                <tbody>
+                               
+                </tbody>
+                    
+            </table>
+        </div>
+        <div class="show" style="display: none;">content2</div>
+        <div class="show" style="display: none;">content3</div>
+    </div>
+</div>
+
+<script>
+    $(window).on('load', function () {
+        console.log("获取课程信息")
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/queryAllCourses",
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                showData(data)
+            },
+            error: function (msg) {
+                alert(msg)
+            },
+        })
+    })
+
+    function showData(data) {
+        console.log(data)
+        console.log(data.length)
+        let i = 0;
+        for (i = 0; i < data.length; i++) {
+            //追加到table中
+            //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |
+            $("<tr></tr>")
+                .append("<td>" + data[i].courseId + "</td>")
+                .append("<td>" + data[i].name + "</td>")
+                .append("<td>" + data[i].learningTime + "</td>")
+                .append("<td>" + data[i].learningScore + "</td>")
+                .append("<td>" + data[i].place + "</td>")
+                .append("<td>" + data[i].selectedNum + "/" + data[i].maxSelectedNum + "</td>")
+                .append("<td>" + data[i].teacher.name + "</td>")
+                .append("<td><input type='button' value='选课'></td>")
+                .appendTo($("#tableList>tbody"))
+                .find("input").click(function () {
+                selectCourse(this)
+            });
+
+
+
+        }
+        return false;
+    }
+</script>
+<script>
+    var $tableList = $("#tableList");
+    //add
+    //selectCourse
+    $("#tableList>tbody a").click(function () {
+        var name = $(this).parent().parent().children("td:eq(0)").text();
+        var price = $(this).parent().parent().children("td:eq(1)").val();
+        console.log(name);
+        console.log(price);
+        $(this).parent().parent().remove();
+
+    })
+
+    function selectCourse(elem) {
+        console.log(elem)
+        let courseId = $(elem).parent().parent().children("td:eq(0)").text();
+        console.log(courseId);
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/selectCourse",
+            method: "post",
+            dataType:"json",
+            data: {
+                courseId:courseId,
+            },
+            success:function (res) {
+                console.log(res)
+                if (res.fig == 1){
+                    alert(res.msg);
+                }
+
+            },
+            error:function (msg) {
+                alert("发生意料之外的错误");
+            }
+        })
+        $(elem).parent().parent().remove();
+    }
+
+</script>
+
+<script>
+    /*
+//jquery
+       $(function(){
+           //点击切换
+           $('span').click(function(){
+               $(this).addClass('tab_active').siblings().removeClass('tab_active');
+               var i = $(this).index();
+               $('.content div').eq(i).css('display','block').addClass('show').siblings().css('display','none');
+           });
+
+          //鼠标经过标签页切换
+          $('span').mouseover(function(){
+               $(this).addClass('tab_active').siblings().removeClass('tab_active');
+               var i = $(this).index();
+               $('.content div').eq(i).css('display','block').addClass('show').siblings().css('display','none');
+           });
+       });
+
+*/
+
+    //JavaScript
+    var tabs = document.getElementsByTagName('span');
+    var contents = document.getElementsByClassName('content')[0];
+    var aaa= contents.getElementsByTagName('div');
+    for(var i = 0, len1 =tabs.length; i<len1; i++){
+        tabs[i].index = i;
+        tabs[i].onclick = function(){
+            for(var j = 0; j < tabs.length; j++){
+                tabs[j].className = "";
+                aaa[j].style.display = "none";
+            }
+            tabs[this.index].className = "tab_active";
+            aaa[this.index].style.display = "block";
+        }
+    }
+
+
+</script>
+</body>
+</html>

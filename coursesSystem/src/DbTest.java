@@ -1,4 +1,13 @@
+import com.google.gson.Gson;
+import dao.studentDao.StudentDao;
+import data.course.Course;
+import data.user.Student;
+import data.user.Teacher;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class DbTest {
 
@@ -11,6 +20,36 @@ public class DbTest {
     //密码，更换成你自己设定的密码，此处为:admin
     private static final String PASSWORD = "root";
     public static void main(String[] args){
+        Teacher teacher = new Teacher();
+        teacher.setName("teacher");
+        List<Course> courses = new ArrayList<>();
+        Course course = new Course();
+        course.setCourseId("1");
+        course.setName("数学");
+        course.setMaxSelectedNum(7);
+        course.setPlace("东九楼");
+        course.setTeacher(teacher);
+        courses.add(course);
+
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(courses);
+        System.out.println(jsonString);
+
+        List<Course> courses1 = gson.fromJson((String)null,List.class);
+        System.out.println(courses1.toString());
+
+        int i = 1;
+        if (i == 1){
+            return;
+        }
+
         /**
          * 1.加载驱动
          *

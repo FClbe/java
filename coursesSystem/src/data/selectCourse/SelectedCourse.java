@@ -1,11 +1,20 @@
 package data.selectCourse;
 
 import data.course.Course;
-import data.enums.CourseStatus;
 
 public class SelectedCourse {
     private Course course;
-    private CourseStatus status;
+    /*1 代表 SELECT 2代表 FINISHED*/
+    private int status;
+
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Course getCourse() {
         return course;
@@ -13,13 +22,5 @@ public class SelectedCourse {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public CourseStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(CourseStatus status) {
-        this.status = status;
     }
 }

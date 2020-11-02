@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      
+    <meta charset="UTF-8">
+      <title>jQuery</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+      
+    <style>
+        .box {
+            width: 1500px;
+        }
+
+        .tab {
+            margin: auto;
+            width: 700px;
+            height: 150px;
+
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: space-between;
+
+        }
+
+        span {
+            width: 100px;
+            height: 20px;
+            padding: 10px;
+            border: 1px solid #333333;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .content div {
+            margin: auto;
+            width: 1400px;
+            border: 1px solid #333333;
+        }
+
+        .tab_active {
+            background-color: #FF0000;
+        }
+
+        .show {
+            background-color: #c9c9c9;
+            display: block;
+        }
+    </style>
+    <style>
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+
+</head>
+<body>
+<div style="position: absolute; right: 20px; top: 0; display: inline-flex">
+    <p>你好，</p>
+    <p class="username">username</p>
+    <input style="height: 30px; margin-top: 10px" type="button" name="logout" value="退出">
+</div>
+<div class="box">
+    <div class="tab">
+        <span class="tab_active">选课</span>
+        <span>查看已选课程</span>
+    </div>
+    <div class="content">
+        <div class="show">
+            <table style="margin: 10px auto;" id="tableList">
+                      
+                <thead>
+                <!-- //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+                        
+                <th>课程ID</th>
+                          
+                <th>课程名</th>
+                          
+                <th>学时</th>
+
+                <th>学分</th>
+
+                <th>时间地点</th>
+                          
+                <th>已选人数/最大人数</th>
+                          
+                <th>老师</th>
+                      
+                </thead>
+                      
+                <tbody>
+                               
+                </tbody>
+                    
+            </table>
+        </div>
+        <div class="show" style="display: none;">
+            <table style="margin: 10px auto;" id="selectCourse">
+                      
+                <thead>
+                <!-- //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+                        
+                <th>课程ID</th>
+                          
+                <th>课程名</th>
+                          
+                <th>学时</th>
+
+                <th>学分</th>
+
+                <th>时间地点</th>
+                          
+                <th>老师</th>
+                          
+                <th>状态</th>
+                      
+                </thead>
+                      
+                <tbody>
+                               
+                </tbody>
+                    
+            </table>
+        </div>
+        <div class="show" style="display: none;">content3</div>
+    </div>
+</div>
+
+
+<script>
+    var accountId;
+    $(window).on('load', queryAllCourses())
+    function queryAllCourses() {
+        console.log("获取课程信息")
+        accountId = getUrlParam('username')
+        $("p.username").text(accountId);
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/queryAllCourses",
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                showData(data)
+            },
+            error: function (msg) {
+                alert(msg)
+            },
+        })
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/querySelCourses",
+            method: "get",
+            dataType: "json",
+            data: {
+                accountId: accountId,
+            },
+            success: function (res) {
+                showSelectCourses(res)
+            },
+            error: function (msg) {
+                alert("msg")
+            },
+        })
+    }
+
+
+    function showData(data) {
+        console.log(data)
+        console.log(data.length)
+        let i = 0;
+        $("#tableList>tbody").empty();
+        for (i = 0; i < data.length; i++) {
+
+            //追加到table中
+            //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |
+            $("<tr></tr>")
+                .append("<td>" + data[i].courseId + "</td>")
+                .append("<td>" + data[i].name + "</td>")
+                .append("<td>" + data[i].learningTime + "</td>")
+                .append("<td>" + data[i].learningScore + "</td>")
+                .append("<td>" + data[i].place + "</td>")
+                .append("<td>" + data[i].selectedNum + "/" + data[i].maxSelectedNum + "</td>")
+                .append("<td>" + data[i].teacher.name + "</td>")
+                .append("<td><input type='button' value='选课'></td>")
+                .appendTo($("#tableList>tbody"))
+                .find("input").click(function () {
+                selectCourse(this)
+            });
+
+
+        }
+        return false;
+    }
+
+    function showSelectCourses(data) {
+        console.log(data)
+        console.log(data.length)
+        let i = 0;
+        $("#selectCourse>tbody").empty();
+        for (i = 0; i < data.length; i++) {
+
+            let status
+            switch (data[i].status) {
+                case 1:
+                    status = '已选'
+                    break;
+                case 2:
+                    status = '已修'
+                    break;
+                case 3:
+                    break;
+            }
+            //追加到table中
+            //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |
+            $("<tr></tr>")
+                .append("<td>" + data[i].course.courseId + "</td>")
+                .append("<td>" + data[i].course.name + "</td>")
+                .append("<td>" + data[i].course.learningTime + "</td>")
+                .append("<td>" + data[i].course.learningScore + "</td>")
+                .append("<td>" + data[i].course.place + "</td>")
+                .append("<td>" + data[i].course.teacher.name +"</td>")
+                .append("<td>" + status+ "</td>")
+                .append("<td><input type='button' value='退选'></td>")
+                .appendTo($("#selectCourse>tbody"))
+                .find("input").click(function () {
+                deleteSelect(this)
+            });
+
+
+        }
+        return false;
+    }
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        let r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null)
+            return unescape(r[2]);
+        return null; //返回参数值
+    }
+</script>
+<script>
+    var $tableList = $("#tableList");
+    //add
+    //selectCourse
+    $("#tableList>tbody a").click(function () {
+        var name = $(this).parent().parent().children("td:eq(0)").text();
+        var price = $(this).parent().parent().children("td:eq(1)").val();
+        console.log(name);
+        console.log(price);
+        $(this).parent().parent().remove();
+
+    })
+
+    function selectCourse(elem) {
+        console.log(elem)
+        let courseId = $(elem).parent().parent().children("td:eq(0)").text();
+        console.log(courseId);
+        let username = $("p.username").text();
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/selectCourse",
+            method: "post",
+            dataType: "json",
+            data: {
+                courseId: courseId,
+                accountId: username,
+            },
+            success: function (res) {
+                alert(res.msg);
+                if (res.fig == 1) {
+                    queryAllCourses()
+                }
+
+            },
+            error: function (msg) {
+                alert("发生意料之外的错误");
+            }
+        })
+    }
+
+    function deleteSelect(elem) {
+        console.log(elem)
+        let courseId = $(elem).parent().parent().children("td:eq(0)").text();
+        console.log(courseId);
+        let username = $("p.username").text();
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/delSelCourse",
+            method: "post",
+            dataType: "json",
+            data: {
+                courseId: courseId,
+                accountId: username,
+            },
+            success: function (res) {
+                alert(res.msg);
+                if (res.fig == 1) {
+                    queryAllCourses()
+                    $(elem).parent().parent().remove();
+                }
+
+            },
+            error: function (msg) {
+                alert("发生意料之外的错误");
+            }
+        })
+
+    }
+
+    $("input[name=logout]").on('click',function () {
+        window.location.href = 'http://localhost:8080/coursesSystem_war_exploded/login/login.html'
+    })
+</script>
+<script>
+    /*
+//jquery
+       $(function(){
+           //点击切换
+           $('span').click(function(){
+               $(this).addClass('tab_active').siblings().removeClass('tab_active');
+               var i = $(this).index();
+               $('.content div').eq(i).css('display','block').addClass('show').siblings().css('display','none');
+           });
+
+          //鼠标经过标签页切换
+          $('span').mouseover(function(){
+               $(this).addClass('tab_active').siblings().removeClass('tab_active');
+               var i = $(this).index();
+               $('.content div').eq(i).css('display','block').addClass('show').siblings().css('display','none');
+           });
+       });
+
+*/
+
+    //JavaScript
+    var tabs = document.getElementsByTagName('span');
+    var contents = document.getElementsByClassName('content')[0];
+    var aaa = contents.getElementsByTagName('div');
+    for (var i = 0, len1 = tabs.length; i < len1; i++) {
+        tabs[i].index = i;
+        tabs[i].onclick = function () {
+            for (var j = 0; j < tabs.length; j++) {
+                tabs[j].className = "";
+                aaa[j].style.display = "none";
+            }
+            tabs[this.index].className = "tab_active";
+            aaa[this.index].style.display = "block";
+        }
+    }
+
+
+</script>
+</body>
+</html>

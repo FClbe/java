@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <title>jQuery</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+      <style>
+    .box{
+        width: 1500px;
+    }
+    .tab {
+        margin: auto;
+        width: 700px;
+        height: 150px;
+
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+
+    }
+
+    span {
+        width: 100px;
+        height: 20px;
+        padding: 10px;
+        border: 1px solid #333333;
+        text-align: center;
+        cursor: pointer;
+    }
+    .content div{
+        margin: auto;
+        width: 1400px;
+        border: 1px solid #333333;
+    }
+    .tab_active{
+        background-color: #FF0000;
+    }
+    .show{
+        background-color: #c9c9c9;
+        display: block;
+    }
+</style>
+    <style>
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div style="position: absolute; right: 20px; top: 0; display: inline-flex;">
+    <p>你好，</p>
+    <p class="username">管理员</p>
+    <input style="height: 30px; margin-top: 10px" type="button" name="logout" value="退出">
+</div>
+<div class="box">
+    <div class="tab">
+        <span class="tab_active">课程管理</span>
+        <span>账号管理</span>
+    </div>
+    <div class="content">
+        <div class="show">
+            <table style="margin: 10px auto;" id="tableList">
+                      
+                <thead>
+                <!-- //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+                        
+                <tr>
+                              
+                    <th>课程ID</th>
+                              
+                    <th>课程名</th>
+                              
+                    <th>学时</th>
+
+                    <th>学分</th>
+
+                    <th>时间地点</th>
+                              
+                    <th>已选人数/最大人数</th>
+                              
+                    <th>老师</th>
+                            
+                </tr>
+                      
+                </thead>
+                      
+                <tbody>
+                               
+                </tbody>
+                    
+            </table>
+            <form>
+                    
+                <table style="margin:0 auto;">
+                          
+                    <tr>
+                                
+                        <td>课程ID</td>
+                                
+                        <td><input type="text" name="courseId"></td>
+                              
+                    </tr>
+                    <tr>
+                                
+                        <td>课程名</td>
+                                
+                        <td><input type="text" name="name"></td>
+                              
+                    </tr>
+
+                    <tr>
+                                
+                        <td>学时</td>
+                                
+                        <td><input type="number" name="learningTime"></td>
+                              
+                    </tr>
+
+                    <tr>
+                                
+                        <td>学分</td>
+                                
+                        <td><input type="number" name="learningScore"></td>
+                              
+                    </tr>
+
+                    <tr>
+                                
+                        <td width="%20">时间地点</td>
+                                
+                        <td><input type="text" name="place"></td>
+                              
+                    </tr>
+
+                    <tr>
+                                
+                        <td>最大人数</td>
+                                
+                        <td><input type="number" name="maxSelectedNum"></td>
+                              
+                    </tr>
+                          
+                    <tr>
+                                
+                        <td>老师</td>
+                                
+                        <td><input type="text" name="teacher"></td>
+                              
+                    </tr>
+                          
+                    <tr>
+                                
+                        <td colspan="2">
+                                      <input type="submit" value="添加" id="add">
+                                    
+                        </td>
+                              
+                    </tr>
+                        
+                </table>
+                  
+            </form>
+        </div>
+        <div class="show" style="display: none;">
+            <table style="margin: 10px auto;" id="accountTable">
+                  
+            <thead>
+            <!-- //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+                    
+            <tr>
+                          
+                <th>账号</th>
+                          
+                <th>账号类型</th>
+                          
+                        
+            </tr>
+                  
+            </thead>
+                  
+            <tbody>
+                           
+            </tbody>
+                
+        </table>
+            <form>
+                    
+                <table style="margin:0 auto;">
+                          
+                    <tr>
+                                
+                        <td>账号</td>
+                                
+                        <td><input type="text" name="accountId"></td>
+                              
+                    </tr>
+                    <tr>
+                                
+                        <td>密码</td>
+                                
+                        <td><input type="text" name="password"></td>
+                              
+                    </tr>
+
+                    <tr>
+                                
+                        <td>账号类型</td>
+                                
+                        <td><input type="number" name="accountType" placeholder="1代表学生 2代表老师（暂无老师功能）"></td>
+                              
+                    </tr>
+
+
+
+                          
+                    <tr>
+                                
+                        <td colspan="2">
+                                      <input type="submit" value="添加" id="addAccount">
+                                    
+                        </td>
+                              
+                    </tr>
+                        
+                </table>
+                  
+            </form>
+        </div>
+        <div class="show" style="display: none;">content3</div>
+    </div>
+</div>
+<script>
+    $(window).on('load',init() )
+
+    function init() {
+        queryAllCourses()
+        queryAllAccounts()
+    }
+    function queryAllCourses() {
+        console.log("获取课程信息")
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/queryAllCourses",
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                showData(data)
+            },
+            error: function (msg) {
+                alert(msg)
+            },
+        })
+    }
+    function showData(data) {
+        console.log(data)
+        console.log(data.length)
+        $("#tableList>tbody").empty();
+        let i = 0;
+        for (i = 0; i < data.length; i++) {
+            //追加到table中
+            //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |
+            $("<tr></tr>")
+                .append("<td>" + data[i].courseId + "</td>")
+                .append("<td>" + data[i].name + "</td>")
+                .append("<td>" + data[i].learningTime + "</td>")
+                .append("<td>" + data[i].learningScore + "</td>")
+                .append("<td>" + data[i].place + "</td>")
+                .append("<td>" + data[i].selectedNum + "/" + data[i].maxSelectedNum + "</td>")
+                .append("<td>" + data[i].teacher.name + "</td>")
+                .append("<td><input type='button' value='删除'></td>")
+                .appendTo($("#tableList>tbody"))
+                .find("input").click(function () {
+                deleteCourse(this)
+            });
+
+
+
+        }
+        return false;
+    }
+    function queryAllAccounts() {
+        console.log("获取课程信息")
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/queryAllAccounts",
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                showAccountData(data)
+            },
+            error: function (msg) {
+                alert(msg)
+            },
+        })
+    }
+    function showAccountData(data) {
+        console.log(data)
+        console.log(data.length)
+        let i = 0;
+        $("#accountTable>tbody").empty();
+        for (i = 0; i < data.length; i++) {
+            //追加到table中
+            //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |
+            $("<tr></tr>")
+                .append("<td>" + data[i].accountId + "</td>")
+                .append("<td>" + data[i].personType + "</td>")
+                .append("<td><input type='button' value='删除'></td>")
+                .appendTo($("#accountTable>tbody"))
+                .find("input").click(function () {
+                deleteAccount(this)
+            });
+
+
+
+        }
+        return false;
+    }
+
+    var $tableList = $("#tableList");
+    //add
+    $("#add").click(function () {
+        //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher
+        let courseId = $("input[name=courseId]").val();
+        let name = $("input[name=name]").val();
+        let learningTime = $("input[name=learningTime]").val();
+        let learningScore = $("input[name=learningScore]").val();
+        let place = $("input[name=place]").val();
+        let maxSelectedNum = $("input[name=maxSelectedNum]").val();
+        let teacher = $("input[name=teacher]").val();
+        console.log(courseId)
+        if (courseId == ""){
+            alert("请输入课程号")
+            return false;
+        }
+        if (name == ""){
+            alert("请输入课程名")
+            return false;
+        }
+        if (learningTime == ""){
+            alert("请输入学时")
+            return false;
+        }
+        if (learningScore == ""){
+            alert("请输入学分")
+            return false;
+        }
+        if (place == ""){
+            alert("请输入时间地点")
+            return false;
+        }
+        if (maxSelectedNum == ""){
+            alert("请输入最大人数")
+            return false;
+        }
+        if (teacher == ""){
+            alert("请输入教师名")
+            return false;
+        }
+        addCourse(courseId,name,learningTime,learningScore,place,maxSelectedNum,teacher)
+        /*if(){
+            $("<tr></tr>")
+                .append("<td>" + courseId + "</td>")
+                .append("<td>" + name + "</td>")
+                .append("<td>" + learningTime + "</td>")
+                .append("<td>" + learningScore + "</td>")
+                .append("<td>" + place + "</td>")
+                .append("<td>" + maxSelectedNum + "</td>")
+                .append("<td>" + teacher + "</td>")
+                .append("<td><input type='button' value='删除'></td>")
+                .appendTo($("#tableList>tbody"))
+                .find("input").click(function () {
+                deleteCourse(this)
+            });
+            initCourseInput();
+        }*/
+        return false;
+    })
+
+    function deleteCourse(elem) {
+        console.log(elem)
+        let courseId = $(elem).parent().parent().children("td:eq(0)").text();
+        console.log(courseId);
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/deleteCourse",
+            method: "post",
+            dataType:"json",
+            data: {
+                courseId:courseId,
+            },
+            success:function (res) {
+                console.log(res)
+                if (res.fig == 1){
+                    alert(res.msg);
+                }
+
+            },
+            error:function (msg) {
+                alert("发生意料之外的错误");
+            }
+        })
+        $(elem).parent().parent().remove();
+    }
+
+    function addCourse(courseId, name, learningTime, learningScore, place, maxSelectedNum, teacher) {
+        let flag = false;
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/addCourse",
+            method: "post",
+            dataType:"json",
+            data:{
+                courseId:courseId,
+                name:name,
+                learningTime:learningTime,
+                learningScore:learningScore,
+                place:place,
+                maxSelectedNum:maxSelectedNum,
+                teacherName:teacher
+            },
+            success:function (res) {
+                console.log(res)
+                alert(res.msg)
+                if (res.fig == 1){
+                    queryAllCourses()
+                    initCourseInput()
+                }
+
+            },
+            error:function (msg) {
+                alert("信息格式不正确");
+            }
+        })
+        return flag;
+    }
+
+    function initCourseInput() {
+        //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+
+        $("input[name=courseId]").val("");
+        $("input[name=name]").val("");
+        $("input[name=learningTime]").val("");
+        $("input[name=learningScore]").val("");
+        $("input[name=place]").val("");
+        $("input[name=maxSelectedNum]").val("");
+        $("input[name=teacher]").val("");
+    }
+
+    $("#addAccount").click(function () {
+        let accountId = $("input[name=accountId]").val();
+        let password = $("input[name=password]").val();
+        let personType = $("input[name=accountType]").val();
+        if (accountId == ""){
+            alert("请输入账号")
+            return false;
+        }
+        if (password == ""){
+            alert("请输入密码")
+            return false;
+        }
+        if (personType == ""){
+            alert("请输入账号类型")
+            return false;
+        }
+        console.log(accountId)
+        addAccount(accountId,password,personType)
+        // if(){
+        //     $("<tr></tr>")
+        //         .append("<td>" + accountId + "</td>")
+        //         .append("<td>" + personType + "</td>")
+        //         .append("<td><input type='button' value='删除'></td>")
+        //         .appendTo($("#accountTable>tbody"))
+        //         .find("input").click(function () {
+        //         deleteAccount(this)
+        //     });
+        //     initAccountInput()
+        // }
+        return false;
+    })
+
+    function deleteAccount(elem) {
+        console.log(elem)
+        let accountId = $(elem).parent().parent().children("td:eq(0)").text();
+        console.log(accountId);
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/delAccountServlet",
+            method: "post",
+            dataType:"json",
+            data: {
+                accountId:accountId,
+            },
+            success:function (res) {
+                console.log(res)
+                if (res.fig == 1){
+                    alert(res.msg);
+                    $(elem).parent().parent().remove();
+                }
+
+            },
+            error:function (msg) {
+                alert("发生意料之外的错误");
+            }
+        })
+
+    }
+
+    function addAccount(accountId, password, personType) {
+        let flag = false;
+        $.ajax({
+            url: "http://localhost:8080/coursesSystem_war_exploded/addAccountServlet",
+            method: "post",
+            dataType:"json",
+            data:{
+                accountId:accountId,
+                password:password,
+                personType:personType,
+            },
+            success:function (res) {
+                console.log(res)
+                alert(res.msg)
+                if (res.fig == 1){
+                    queryAllAccounts()
+                    initAccountInput()
+                }
+
+            },
+            error:function (msg) {
+                alert("信息格式不正确");
+            }
+        })
+        return flag;
+    }
+
+    function initAccountInput() {
+        //courseId  | name | learningTime | learningScore | place | selectedNum/maxSelectedNum | teacher |-->
+
+        $("input[name=accountId]").val("");
+        $("input[name=password]").val("");
+        $("input[name=accountType]").val("");
+    }
+
+    $("input[name=logout]").on('click',function () {
+        window.location.href = 'http://localhost:8080/coursesSystem_war_exploded/login/login.html'
+    })
+</script>
+<script>
+    /*
+//jquery
+       $(function(){
+           //点击切换
+           $('span').click(function(){
+               $(this).addClass('tab_active').siblings().removeClass('tab_active');
+               var i = $(this).index();
+               $('.content div').eq(i).css('display','block').addClass('show').siblings().css('display','none');
+           });
+
+          //鼠标经过标签页切换
+          $('span').mouseover(function(){
+               $(this).addClass('tab_active').siblings().removeClass('tab_active');
+               var i = $(this).index();
+               $('.content div').eq(i).css('display','block').addClass('show').siblings().css('display','none');
+           });
+       });
+
+*/
+
+    //JavaScript
+    var tabs = document.getElementsByTagName('span');
+    var contents = document.getElementsByClassName('content')[0];
+    var aaa= contents.getElementsByTagName('div');
+    for(var i = 0, len1 =tabs.length; i<len1; i++){
+        tabs[i].index = i;
+        tabs[i].onclick = function(){
+            for(var j = 0; j < tabs.length; j++){
+                tabs[j].className = "";
+                aaa[j].style.display = "none";
+            }
+            tabs[this.index].className = "tab_active";
+            aaa[this.index].style.display = "block";
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="coursesSystem:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/coursesSystem_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="coursesSystem/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="coursesSystem" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/../../../mysql-connector-java-8.0.17/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar" />
+          <element id="library" level="project" name="com.google.code.gson:gson:2.8.6" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

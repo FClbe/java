@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script type="text/javascript"></script>
+</head>
+
+
+<body>
+<fieldset>
+    <table background="images\bg_img1.jpg " width="933" height="412">
+        <tr height="170">
+            <td width="570px"></td>
+
+            <td><h1>学生选课系统登录界面</h1></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <table>
+                    <form method="POST" name="frmLogin">
+                        <tr>
+                            <td>用户名：</td>
+                            <td><input type="text" name="username" size="20" maxlength="20"
+                                       placeholder="请输入用户名"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>密 码：</td>
+                            <td><input type="password" name="password" size="20" maxlength="20" placeholder="请输入密码"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </form>
+                </table>
+            </td>
+        <tr>
+            <td></td>
+            <td>
+                <table>
+                    <tr>
+                        <td><input type="submit" name="login" value="登录" onClick="validateLogin()"/></td>
+                        <td><input type="reset" name="rs" value="重置"></td>
+<!--                        <td><input type="button" name="button" value="注册"></td>-->
+                    </tr>
+                    </tr>
+                </table>
+            </td>
+    </table>
+</fieldset>
+</form>
+<script language="javascript">
+    function validateLogin() {
+        console.log("hhh")
+        let sUserName = document.frmLogin.username.value;
+        let sPassword = document.frmLogin.password.value;
+        if (sUserName == "") {
+            alert("请输入用户名!");
+            return false;
+        }
+
+        if (sPassword == "") {
+            alert("请输入密码!");
+            return false;
+        }
+        $.ajax({
+            url:"http://localhost:8080/coursesSystem_war_exploded/loginCheck",
+            method: "post",
+            data:{
+              username:sUserName,
+              password:sPassword,
+            },
+            dataType:"json",
+            success:function (res) {
+                alert(res.msg);
+                if (res.fig == 1){
+                    window.location.href=res.data;
+                }
+            },
+            error:function () {
+
+            }
+        })
+
+    }
+</script>
+</body>
+</html>
